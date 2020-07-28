@@ -107,6 +107,5 @@ def test_lstsq():
     return f"python,numpy,lstsq,{r}"
 
 
-if __name__ == "__main__":
-    for f in functions:
-        print(f())
+for f in functions:
+    print(f())
