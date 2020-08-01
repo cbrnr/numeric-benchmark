@@ -67,4 +67,4 @@ print(f"python,{BLAS},solve,{t}")
 a = np.random.default_rng(1).uniform(size=(2000, 1500))
 b = np.arange(2000)
 t = min(repeat(lambda: np.linalg.lstsq(a, b, rcond=None), number=5)) / 5
-print(f"python,{BLAS},lstsq,{t}")
+print(f"python,{BLAS},lstsqr,{t}")
