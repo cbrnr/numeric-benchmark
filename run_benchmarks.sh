@@ -1,20 +1,17 @@
 #!/usr/bin/env bash
 
-FILE=results.csv
-if [[ -f "$FILE" ]]; then
-    echo "$FILE exists (make sure $FILE does not exist to run the benchmarks)."
-    exit -1
-fi
-
 PYTHON_OPENBLAS=/usr/local/bin/python3
 PYTHON_MKL=~/anaconda/bin/python
+MATLAB=/Applications/MATLAB_R2019b.app/bin/matlab
 
-echo "language,blas,benchmark,time" > $FILE
 echo "Benchmarking Python OpenBLAS..."
-$PYTHON_OPENBLAS benchmark_python.py >> results.csv
+$PYTHON_OPENBLAS benchmark_python.py
 
 echo "Benchmarking Python MKL..."
-$PYTHON_MKL benchmark_python.py >> results.csv
+$PYTHON_MKL benchmark_python.py
 
 echo "Benchmarking Julia OpenBLAS..."
-julia benchmark_julia.jl >> results.csv
+julia benchmark_julia.jl
+
+echo "Benchmarking MATLAB..."
+$MATLAB -nojvm -r "run('benchmark_matlab.m'); exit;"

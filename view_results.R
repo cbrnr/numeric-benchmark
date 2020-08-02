@@ -2,15 +2,14 @@ library(readr)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(purrr)
 
 theme_set(theme_minimal())
 
-df <- read_csv("results.csv")
+df <- map_df(list.files(pattern="*.csv"), read_csv)
 
 df %>% 
-    filter(threads==-1) %>% 
     unite("lang", language:blas, sep="/") %>% 
     ggplot(aes(y=benchmark, x=time, fill=lang)) +
     geom_col(position=position_dodge()) +
-    labs(y=NULL) +
-    coord_cartesian(xlim=c(0, 8))
+    labs(y=NULL)
